@@ -13,8 +13,9 @@ class MigratorManager {
     private $pdo;
     private $table;
     private $fields;
+    private $conditions;
 
-    public function __construct(PDO $pdo, $table, array $fields = []) {
+    public function __construct(PDO $pdo, $table, array $fields = [], array $conditions = []) {
 
         if (!$table) {
             throw new InvalidArgumentException('No table specified. You must specify a table to search.');
@@ -23,6 +24,7 @@ class MigratorManager {
         $this->pdo = $pdo;
         $this->table = $table;
         $this->fields = $fields;
+        $this->conditions = $conditions;
     }
 
     public function createMigrator() {
@@ -31,6 +33,15 @@ class MigratorManager {
         $migrator->setSource(new PDOSource($this->pdo, $this->table));
         $migrator->setDestination(new NullDestination());
         $migrator->setFieldsToMigrate($this->fields);
+        $migrator->setSkipIfTrueCheck(function($dataRow) {
+            foreach($this->conditions as $fieldName => $value) {
+                $dataItem = $dataRow->getDataItemByFieldName($fieldName);
+                if ($dataItem->value != $value) {
+                    return true;
+                }
+            }
+            return false;
+        });
 
         return $migrator;
     }

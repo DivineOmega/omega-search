@@ -11,7 +11,7 @@ class Search {
     private $migratorManager;
     private $primaryKey;
 
-    public function __construct(PDO $pdo, $table, $primaryKey, array $fields = []) {
+    public function __construct(PDO $pdo, $table, $primaryKey, array $fields = [], array $conditions = []) {
 
         if (!$table) {
             throw new InvalidArgumentException('No table specified. You must specify a table to search.');
@@ -25,7 +25,7 @@ class Search {
             $fields[] = $primaryKey;
         }
 
-        $this->migratorManager = new MigratorManager($pdo, $table, $fields);
+        $this->migratorManager = new MigratorManager($pdo, $table, $fields, $conditions);
         $this->primaryKey = $primaryKey;
 
     }
