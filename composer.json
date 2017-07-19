@@ -1,4 +1,13 @@
 {
+    "name": "rapidwebltd/search",
+    "description": "Search",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jordan Hall",
+            "email": "jordan.hall@rapidweb.biz"
+        }
+    ],
     "require": {
         "rapidwebltd/uxdm": "^1.12"
     },
@@ -6,5 +15,6 @@
         "psr-4": {
             "RapidWeb\\Search\\": "src/"
         }
-    }
+    },
+    "license": "LGPL3"
 }
