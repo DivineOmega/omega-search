@@ -1,0 +1,10 @@
+{
+    "require": {
+        "rapidwebltd/uxdm": "^1.12"
+    },
+    "autoload":{
+        "psr-4": {
+            "RapidWeb\\Search\\": "src/"
+        }
+    }
+}
