@@ -75,11 +75,11 @@ class Search {
                 similar_text($value, $term, $percent);
                 $relevance += $percent;
 
-                if (strpos($dataItem->value, $term) !== false) {
+                if (strpos($value, $term) !== false) {
                     $relevance += 100;
                 }
 
-                if (strpos(' '.$dataItem->value.' ', ' '.$term.' ') !== false) {
+                if (strpos(' '.$value.' ', ' '.$term.' ') !== false) {
                     $relevance += 100;
                 }
 
