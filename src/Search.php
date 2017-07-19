@@ -10,6 +10,7 @@ class Search {
 
     private $migratorManager;
     private $primaryKey;
+    private $conditions;
 
     public function __construct(PDO $pdo, $table, $primaryKey, array $fields = [], array $conditions = []) {
 
@@ -33,6 +34,7 @@ class Search {
 
         $this->migratorManager = new MigratorManager($pdo, $table, $fields);
         $this->primaryKey = $primaryKey;
+        $this->conditions = $conditions;
 
     }
 
@@ -59,7 +61,7 @@ class Search {
 
             foreach($dataItems as $dataItem) {
 
-                if ($dataItem->fieldName == $this->primaryKey || array_key_exists($dataItem->fieldName, $conditions)) {
+                if ($dataItem->fieldName == $this->primaryKey || array_key_exists($dataItem->fieldName, $this->conditions)) {
                     continue;
                 }
 
