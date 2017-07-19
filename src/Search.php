@@ -25,12 +25,12 @@ class Search {
             $fields[] = $primaryKey;
         }
 
-        $this->migratorManager = new MigratorManager($pdo, $table, $fields, $conditions);
+        $this->migratorManager = new MigratorManager($pdo, $table, $fields);
         $this->primaryKey = $primaryKey;
 
     }
 
-    public function query($term, $limit = PHP_INT_MAX) {
+    public function query($term, $limit = PHP_INT_MAX, $conditions) {
 
         $term = strtolower($term);
 
@@ -38,7 +38,14 @@ class Search {
 
         $migrator = $this->migratorManager->createMigrator();
 
-        $migrator->setDataRowManipulator(function($dataRow) use ($term, &$results) {
+        $migrator->setDataRowManipulator(function($dataRow) use ($term, $conditions, &$results) {
+
+            foreach($conditions as $fieldName => $value) {
+                $dataItem = $dataRow->getDataItemByFieldName($fieldName);
+                if ($dataItem->value != $value) {
+                    return;
+                }
+            }
 
             $dataItems = $dataRow->getDataItems();
 
