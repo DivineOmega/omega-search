@@ -25,12 +25,18 @@ class Search {
             $fields[] = $primaryKey;
         }
 
+        foreach($conditions as $fieldName => $value) {
+            if (!in_array($fieldName, $fields)) {
+                $fields[] = $fieldName;
+            }
+        }
+
         $this->migratorManager = new MigratorManager($pdo, $table, $fields);
         $this->primaryKey = $primaryKey;
 
     }
 
-    public function query($term, $limit = PHP_INT_MAX, $conditions) {
+    public function query($term, $limit = PHP_INT_MAX) {
 
         $term = strtolower($term);
 
@@ -38,9 +44,9 @@ class Search {
 
         $migrator = $this->migratorManager->createMigrator();
 
-        $migrator->setDataRowManipulator(function($dataRow) use ($term, $conditions, &$results) {
+        $migrator->setDataRowManipulator(function($dataRow) use ($term, &$results) {
 
-            foreach($conditions as $fieldName => $value) {
+            foreach($this->conditions as $fieldName => $value) {
                 $dataItem = $dataRow->getDataItemByFieldName($fieldName);
                 if ($dataItem->value != $value) {
                     return;
@@ -53,7 +59,7 @@ class Search {
 
             foreach($dataItems as $dataItem) {
 
-                if ($dataItem->fieldName == $this->primaryKey) {
+                if ($dataItem->fieldName == $this->primaryKey || array_key_exists($dataItem->fieldName, $conditions)) {
                     continue;
                 }
 
