@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "rapidwebltd/uxdm": "^1.12"
+        "rapidwebltd/uxdm": "^1.12",
+        "illuminate/support": "^5.1"
     },
     "autoload":{
         "psr-4": {

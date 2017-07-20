@@ -5,6 +5,7 @@ namespace RapidWeb\Search;
 use PDO;
 use InvalidArgumentException;
 use RapidWeb\Search\MigratorManager;
+use Illuminate\Support\Str;
 
 class Search {
 
@@ -40,7 +41,7 @@ class Search {
 
     public function query($term, $limit = PHP_INT_MAX) {
 
-        $term = strtolower($term);
+        $term = strtolower(trim($term));
 
         $results = [];
 
@@ -74,13 +75,28 @@ class Search {
                 $percent = 0;
                 similar_text($value, $term, $percent);
                 $relevance += $percent;
+                
+                $terms = [$term, Str::singular($term)];
 
-                if (strpos($value, $term) !== false) {
-                    $relevance += 100;
+                foreach(explode(' ', $term) as $word) {
+                    if (!$word) {
+                        continue;
+                    }
+                    $word = trim($word);
+                    $terms[] = $word;
+                    $terms[] = Str::singular($word);
                 }
 
-                if (strpos(' '.$value.' ', ' '.$term.' ') !== false) {
-                    $relevance += 100;
+                foreach($terms as $term) {
+
+                    if (Str::contains($value, $term) !== false) {
+                        $relevance += 100;
+                    }
+
+                    if (Str::contains(' '.$value.' ', ' '.$term.' ') !== false) {
+                        $relevance += 100;
+                    }
+
                 }
 
             }
