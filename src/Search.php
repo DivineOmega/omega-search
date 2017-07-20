@@ -43,11 +43,30 @@ class Search {
 
         $term = strtolower(trim($term));
 
+        $terms = [$term];
+
+        $singularTerm = Str::singular($term);
+        if ($singularTerm != $term) {
+            $terms[] = $singularTerm;
+        }
+
+        foreach(explode(' ', $term) as $word) {
+            if (!$word) {
+                continue;
+            }
+            $word = trim($word);
+            $terms[] = $word;
+            $singularWord = Str::singular($word);
+            if ($singularWord != $word) {
+                $terms[] = $singularWord;
+            }
+        }
+
         $results = [];
 
         $migrator = $this->migratorManager->createMigrator();
 
-        $migrator->setDataRowManipulator(function($dataRow) use ($term, &$results) {
+        $migrator->setDataRowManipulator(function($dataRow) use ($terms, &$results) {
 
             foreach($this->conditions as $fieldName => $value) {
                 $dataItem = $dataRow->getDataItemByFieldName($fieldName);
@@ -68,32 +87,21 @@ class Search {
 
                 $value = strtolower($dataItem->value);
 
-                if (strlen($value) < strlen($term)) {
+                if (strlen($value) < strlen($term[0])) {
                     continue;
                 }
 
                 $percent = 0;
-                similar_text($value, $term, $percent);
+                similar_text($value, $term[0], $percent);
                 $relevance += $percent;
-                
-                $terms = [$term, Str::singular($term)];
-
-                foreach(explode(' ', $term) as $word) {
-                    if (!$word) {
-                        continue;
-                    }
-                    $word = trim($word);
-                    $terms[] = $word;
-                    $terms[] = Str::singular($word);
-                }
 
                 foreach($terms as $term) {
 
-                    if (Str::contains($value, $term) !== false) {
+                    if (Str::contains($value, $term)) {
                         $relevance += 100;
                     }
 
-                    if (Str::contains(' '.$value.' ', ' '.$term.' ') !== false) {
+                    if (Str::contains(' '.$value.' ', ' '.$term.' ')) {
                         $relevance += 100;
                     }
 
