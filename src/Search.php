@@ -9,38 +9,58 @@ use Illuminate\Support\Str;
 
 class Search {
 
-    private $migratorManager;
+    private $pdo;
+    private $table;
     private $primaryKey;
+    private $fields;
     private $conditions;
 
-    public function __construct(PDO $pdo, $table, $primaryKey, array $fields = [], array $conditions = []) {
+    public function setDatabaseConnection(PDO $pdo) {
+        $this->pdo = $pdo;
+        return $this;
+    }
 
-        if (!$table) {
+    public function setTable($table) {
+        $this->table = $table;
+        return $this;
+    }
+
+    public function setPrimaryKey($primaryKey) {
+        $this->primaryKey = $primaryKey;
+        return $this;
+    }
+
+    public function setFieldsToSearch(array $fields = []) {
+        $this->fields = $fields;
+        return $this;
+    }
+
+    public function setConditions(array $conditions = []) {
+        $this->conditions = $conditions;
+        return $this;
+    }
+
+    private function sanityCheck() {
+        if (!$this->table) {
             throw new InvalidArgumentException('No table specified. You must specify a table to search.');
         }
 
-        if (!$primaryKey) {
+        if (!$this->primaryKey) {
             throw new InvalidArgumentException('No primary key specified. You must specify the table\' primary key.');
         }
 
-        if (!in_array($primaryKey, $fields)) {
-            $fields[] = $primaryKey;
+        if (!in_array($this->primaryKey, $this->fields)) {
+            $this->fields[] = $this->primaryKey;
         }
 
-        foreach($conditions as $fieldName => $value) {
-            if (!in_array($fieldName, $fields)) {
-                $fields[] = $fieldName;
+        foreach($this->conditions as $fieldName => $value) {
+            if (!in_array($fieldName, $this->fields)) {
+                $this->fields[] = $fieldName;
             }
         }
-
-        $this->migratorManager = new MigratorManager($pdo, $table, $fields);
-        $this->primaryKey = $primaryKey;
-        $this->conditions = $conditions;
-
     }
 
-    public function query($term, $limit = PHP_INT_MAX) {
-
+    private function buildSearchTerms($term) {
         $term = strtolower(trim($term));
 
         $terms = [$term];
@@ -49,6 +69,15 @@ class Search {
         if ($singularTerm != $term) {
             $terms[] = $singularTerm;
         }
+
+        return $results;
+    }
+
+    public function query($term, $limit = PHP_INT_MAX) {
+
+        $this->sanityCheck();
+
+        $terms = $this->buildSearchTerms($term);
 
         foreach(explode(' ', $term) as $word) {
             if (!$word) {
@@ -64,7 +93,8 @@ class Search {
 
         $results = [];
 
-        $migrator = $this->migratorManager->createMigrator();
+        $migratorManager = new MigratorManager($this->pdo, $this->table, $this->fields);
+        $migrator = $migratorManager->createMigrator();
 
         $migrator->setDataRowManipulator(function($dataRow) use ($terms, &$results) {
 

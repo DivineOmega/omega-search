@@ -1,11 +1,16 @@
 <?php
-
-require_once __DIR__.'/../vendor/autoload.php';
+use \RapidWeb\Search\Search;
 
 $pdo = new PDO('mysql:dbname=database_name;host=127.0.0.1', 'username', 'password');
 
-$search = new \RapidWeb\Search\Search($pdo, 'products', 'product_id', ['product_name', 'product_description', 'product_seokeywords']);
+$search = new Search;
 
-$results = $search->query('pxielated', 10);
+$search->setDatabaseConnection($pdo)
+       ->setTable('product')
+       ->setPrimaryKey('product_id')
+       ->setFieldsToSearch(['product_name', 'product_description', 'product_seokeywords'])
+       ->setConditions(['product_live' => 1]);
+         
+$results = $search->query('test product', 10);
 
 var_dump($results);
