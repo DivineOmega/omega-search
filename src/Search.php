@@ -70,15 +70,6 @@ class Search {
             $terms[] = $singularTerm;
         }
 
-        return $results;
-    }
-
-    public function query($term, $limit = PHP_INT_MAX) {
-
-        $this->sanityCheck();
-
-        $terms = $this->buildSearchTerms($term);
-
         foreach(explode(' ', $term) as $word) {
             if (!$word) {
                 continue;
@@ -90,6 +81,15 @@ class Search {
                 $terms[] = $singularWord;
             }
         }
+
+        return $results;
+    }
+
+    public function query($term, $limit = PHP_INT_MAX) {
+
+        $this->sanityCheck();
+
+        $terms = $this->buildSearchTerms($term);
 
         $results = [];
 
