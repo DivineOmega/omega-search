@@ -82,7 +82,7 @@ class Search {
             }
         }
 
-        return $results;
+        return $terms;
     }
 
     public function query($term, $limit = PHP_INT_MAX) {
