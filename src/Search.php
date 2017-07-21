@@ -49,6 +49,10 @@ class Search {
             throw new InvalidArgumentException('No primary key specified. You must specify the table\' primary key.');
         }
 
+        if (!$this->fields) {
+            throw new InvalidArgumentException('No fields specified. You must specify the fields you wish to search.');
+        }
+
         if (!in_array($this->primaryKey, $this->fields)) {
             $this->fields[] = $this->primaryKey;
         }
