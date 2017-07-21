@@ -75,7 +75,7 @@ class Search {
         }
 
         foreach(explode(' ', $term) as $word) {
-            if (!$word) {
+            if (!$word || in_array($word, $terms)) {
                 continue;
             }
             $word = trim($word);
