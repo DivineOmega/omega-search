@@ -27,7 +27,7 @@ $search = new Search;
 
 // Configure the Search object
 $search->setDatabaseConnection($pdo)
-       ->setTable('product')
+       ->setTable('products')
        ->setPrimaryKey('product_id')
        ->setFieldsToSearch(['product_name', 'product_description', 'product_seokeywords'])
        ->setConditions(['product_live' => 1]);
