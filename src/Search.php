@@ -121,12 +121,12 @@ class Search {
 
                 $value = strtolower($dataItem->value);
 
-                if (strlen($value) < strlen($term[0])) {
+                if (strlen($value) < strlen($terms[0])) {
                     continue;
                 }
 
                 $percent = 0;
-                similar_text($value, $term[0], $percent);
+                similar_text($value, $terms[0], $percent);
                 $relevance += $percent;
 
                 foreach($terms as $term) {
