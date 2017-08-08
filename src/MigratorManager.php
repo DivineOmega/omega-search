@@ -7,9 +7,6 @@ use InvalidArgumentException;
 use RapidWeb\uxdm\Objects\Migrator;
 use RapidWeb\uxdm\Objects\Sources\PDOSource;
 use RapidWeb\uxdm\Objects\Destinations\NullDestination;
-use League\Flysystem\Adapter\Local;
-use League\Flysystem\Filesystem;
-use Cache\Adapter\Filesystem\FilesystemCachePool;
 
 class MigratorManager {
 

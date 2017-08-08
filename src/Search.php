@@ -6,6 +6,7 @@ use PDO;
 use InvalidArgumentException;
 use RapidWeb\Search\MigratorManager;
 use Illuminate\Support\Str;
+use Psr\Cache\CacheItemPoolInterface;
 
 class Search {
 
