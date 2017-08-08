@@ -39,22 +39,6 @@ $results = $search->query('test product', 10);
 var_dump($results);
 ```
 
-The results are returned as an associative array, in the following format.
-
-```php
-Array
-(
-    // [Record Primary Key] => Relevance (higher is more relevant)
-
-    [16647] => 402.17040273556
-    [16651] => 402.04274717241
-    [17190] => 401.14345056617
-    [15348] => 303.11566587702
-    [15345] => 303.04049844237
-    [15349] => 302.90270308353
-    [15347] => 302.81635802469
-    [15344] => 302.78347032992
-    [15346] => 302.61082737487
-    [14532] => 302.27662411888
-)
-```
+The results are returned as a `SearchResults` object containing an array of `SearchResult` objects.
+This `SearchResults` object also contains various statistics such as the highlest, lowest and average relevances,
+and the time taken to perform the search.
