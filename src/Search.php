@@ -102,6 +102,8 @@ class Search {
 
     public function query($term, $limit = PHP_INT_MAX) {
 
+        $startMicrotime = microtime(true);
+
         $this->sanityCheck();
 
         $terms = $this->buildSearchTerms($term);
@@ -178,6 +180,7 @@ class Search {
         }
 
         $searchResults->calculateRelevances();
+        $searchResults->time = microtime(true) - $startMicrotime;
 
         return $searchResults;
 

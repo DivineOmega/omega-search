@@ -10,6 +10,7 @@ class SearchResults {
     public $highestRelevance = null;
     public $lowestRelevance = null;
     public $averageRelevance = null;
+    public $time = null;
 
     public function addSearchResult(SearchResult $searchResult) {
         $this->results[] = $searchResult;
@@ -17,7 +18,7 @@ class SearchResults {
     
     public function calculateRelevances() {
 
-        if (!$results) {
+        if (!$this->results) {
             return;
         }
 
@@ -26,7 +27,7 @@ class SearchResults {
 
         $relevances = [];
 
-        foreach($results as $result) {
+        foreach($this->results as $result) {
             if ($result->relevance < $this->lowestRelevance) {
                 $this->lowestRelevance = $result->relevance;
             }
