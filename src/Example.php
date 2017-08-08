@@ -6,7 +6,7 @@ $pdo = new PDO('mysql:dbname=database_name;host=127.0.0.1', 'username', 'passwor
 $search = new Search;
 
 $search->setDatabaseConnection($pdo)
-//     ->setCache($cachePoolItem, 60*60*24)
+//     ->setCache($cacheItemPool, 60*60*24)
        ->setTable('products')
        ->setPrimaryKey('product_groupid')
        ->setFieldsToSearch(['product_name', 'product_description', 'product_seokeywords'])
