@@ -5,6 +5,8 @@ namespace RapidWeb\Search;
 use PDO;
 use InvalidArgumentException;
 use RapidWeb\Search\MigratorManager;
+use RapidWeb\Search\SearchResults;
+use RapidWeb\Search\SearchResult;
 use Illuminate\Support\Str;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -169,7 +171,15 @@ class Search {
 
         $results = array_slice($results, 0, $limit, true);
 
-        return $results;
+        $searchResults = new SearchResults;
+
+        foreach ($results as $id => $relevance) {
+            $searchResults->addSearchResult(new SearchResult($id, $relevance));
+        }
+
+        $searchResults->calculateRelevances();
+
+        return $searchResults;
 
     }
 
