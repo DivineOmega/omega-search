@@ -14,6 +14,8 @@ class Search {
     private $primaryKey;
     private $fields;
     private $conditions;
+    private $cacheItemPool;
+    private $cacheExpiresAfter;
 
     public function setDatabaseConnection(PDO $pdo) {
         $this->pdo = $pdo;
@@ -37,6 +39,12 @@ class Search {
 
     public function setConditions(array $conditions = []) {
         $this->conditions = $conditions;
+        return $this;
+    }
+
+    public function setCache(CacheItemPoolInterface $cacheItemPool, $cacheExpiresAfter = 60*60*24) {
+        $this->cacheItemPool = $cacheItemPool;
+        $this->cacheExpiresAfter = $cacheExpiresAfter;
         return $this;
     }
 
@@ -99,6 +107,11 @@ class Search {
 
         $migratorManager = new MigratorManager($this->pdo, $this->table, $this->fields);
         $migrator = $migratorManager->createMigrator();
+
+        if ($this->cacheItemPool && $this->cacheExpiresAfter) {
+            $cacheKey = sha1(serialize($terms));
+            $migrator->setSourceCache($this->cacheItemPool, $cacheKey, $this->cacheExpiresAfter);
+        }
 
         $migrator->setDataRowManipulator(function($dataRow) use ($terms, &$results) {
 
