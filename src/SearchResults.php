@@ -15,7 +15,7 @@ class SearchResults {
         $this->results[] = $searchResult;
     }
     
-    private function calculateRelevances() {
+    public function calculateRelevances() {
 
         if (!$results) {
             return;
