@@ -114,7 +114,7 @@ class Search {
         $migrator = $migratorManager->createMigrator();
 
         if ($this->cacheItemPool && $this->cacheExpiresAfter) {
-            $cacheKey = sha1(serialize($terms));
+            $cacheKey = sha1(serialize([$this->pdo->getAttribute(PDO::ATTR_CONNECTION_STATUS), $this->table, $this->fields]));
             $migrator->setSourceCache($this->cacheItemPool, $cacheKey, $this->cacheExpiresAfter);
         }
 
