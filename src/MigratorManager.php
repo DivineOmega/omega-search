@@ -27,8 +27,11 @@ class MigratorManager {
 
     public function createMigrator() {
 
+        $pdoSource = new PDOSource($this->pdo, $this->table);
+        $pdoSource->setPerPage(100);
+
         $migrator = new Migrator();
-        $migrator->setSource(new PDOSource($this->pdo, $this->table));
+        $migrator->setSource($pdoSource);
         $migrator->setDestination(new NullDestination());
         $migrator->setFieldsToMigrate($this->fields);
 
