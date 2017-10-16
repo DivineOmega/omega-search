@@ -40,5 +40,5 @@ var_dump($results);
 ```
 
 The results are returned as a `SearchResults` object containing an array of `SearchResult` objects.
-This `SearchResults` object also contains various statistics such as the highlest, lowest and average relevances,
+This `SearchResults` object also contains various statistics such as the highest, lowest and average relevances,
 and the time taken to perform the search.
