@@ -1,6 +1,6 @@
 {
     "name": "rapidwebltd/search",
-    "description": "Search",
+    "description": "Search allows you to easily add an intelligent search engine to your website or web application. It can be configured to search any database table.",
     "type": "library",
     "authors": [
         {
