@@ -44,7 +44,7 @@ This `SearchResults` object also contains various statistics such as the highest
 and the time taken to perform the search.
 
 Each `SearchResult` object in the array provides the primary key `id` and its `relevance`. The `relevance` is 
-simply a number that is higher on more relevant results.
+simply a number that is higher on more relevant results. The array is sorted by relevance descending.
 
 ```php
 object(RapidWeb\Search\SearchResults)#731 (5) {
