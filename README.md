@@ -79,7 +79,7 @@ object(RapidWeb\Search\SearchResults)#731 (5) {
 
 ### Caching Source Data
 
-The speed up searching, you can cache the source data using any PSR-6 compliant cache pool. An example of this is shown below.
+To speed up searching, you can cache the source data using any PSR-6 compliant cache pool. An example of this is shown below.
 
 ```php
 // Create cache pool
