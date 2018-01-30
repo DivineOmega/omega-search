@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "rapidwebltd/uxdm": "^1.14",
+        "rapidwebltd/uxdm": "^1.17.4",
         "illuminate/support": "^5.1",
         "psr/cache": "^1.0"
     },
