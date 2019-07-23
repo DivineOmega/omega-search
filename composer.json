@@ -1,5 +1,5 @@
 {
-    "name": "divineomega/search",
+    "name": "divineomega/omega-search",
     "description": "Search allows you to easily add an intelligent search engine to your website or web application.",
     "type": "library",
     "authors": [
@@ -15,7 +15,7 @@
     },
     "autoload":{
         "psr-4": {
-            "DivineOmega\\Search\\": "src/"
+            "DivineOmega\\OmegaSearch\\": "src/"
         }
     },
     "license": "LGPL-3.0-only"

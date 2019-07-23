@@ -16,7 +16,7 @@ composer require divineomega/search
 Using Search is easy. Take a look at the following example.
 
 ```php
-use \DivineOmega\Search\Search;
+use \DivineOmega\OmegaSearch\OmegaSearch;
 
 // Setup your database connection. 
 // If you already have a connection setup, you can skip this step.
@@ -47,11 +47,11 @@ Each `SearchResult` object in the array provides the primary key `id` and its `r
 simply a number that is higher on more relevant results. The array is sorted by relevance descending.
 
 ```php
-object(DivineOmega\Search\SearchResults)#731 (5) {
+object(DivineOmega\OmegaSearch\SearchResults)#731 (5) {
   ["results"]=>
   array(10) {
     [0]=>
-    object(DivineOmega\Search\SearchResult)#588 (2) {
+    object(DivineOmega\OmegaSearch\SearchResult)#588 (2) {
       ["id"]=>
       int(80)
       ["relevance"]=>
@@ -59,7 +59,7 @@ object(DivineOmega\Search\SearchResults)#731 (5) {
     }
     /** ... snipped ... */
     [9]=>
-    object(DivineOmega\Search\SearchResult)#597 (2) {
+    object(DivineOmega\OmegaSearch\SearchResult)#597 (2) {
       ["id"]=>
       int(18469)
       ["relevance"]=>

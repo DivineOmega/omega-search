@@ -1,16 +1,13 @@
 <?php
 
-namespace DivineOmega\Search;
+namespace DivineOmega\OmegaSearch;
 
 use PDO;
 use InvalidArgumentException;
-use DivineOmega\Search\MigratorManager;
-use DivineOmega\Search\SearchResults;
-use DivineOmega\Search\SearchResult;
 use Illuminate\Support\Str;
 use Psr\Cache\CacheItemPoolInterface;
 
-class Search {
+class OmegaSearch {
 
     private $pdo;
     private $table;

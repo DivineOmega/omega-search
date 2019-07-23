@@ -1,6 +1,6 @@
 <?php
 
-namespace DivineOmega\Search;
+namespace DivineOmega\OmegaSearch;
 
 
 class SearchResult {
