@@ -1,12 +1,12 @@
 <?php
 
-namespace RapidWeb\Search;
+namespace DivineOmega\Search;
 
 use PDO;
 use InvalidArgumentException;
-use RapidWeb\Search\MigratorManager;
-use RapidWeb\Search\SearchResults;
-use RapidWeb\Search\SearchResult;
+use DivineOmega\Search\MigratorManager;
+use DivineOmega\Search\SearchResults;
+use DivineOmega\Search\SearchResult;
 use Illuminate\Support\Str;
 use Psr\Cache\CacheItemPoolInterface;
 

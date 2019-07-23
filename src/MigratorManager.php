@@ -1,12 +1,12 @@
 <?php
 
-namespace RapidWeb\Search;
+namespace DivineOmega\Search;
 
 use PDO;
 use InvalidArgumentException;
-use RapidWeb\uxdm\Objects\Migrator;
-use RapidWeb\uxdm\Objects\Sources\PDOSource;
-use RapidWeb\uxdm\Objects\Destinations\NullDestination;
+use DivineOmega\uxdm\Objects\Migrator;
+use DivineOmega\uxdm\Objects\Sources\PDOSource;
+use DivineOmega\uxdm\Objects\Destinations\NullDestination;
 
 class MigratorManager {
 

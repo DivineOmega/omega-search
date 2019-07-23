@@ -1,21 +1,21 @@
 {
-    "name": "rapidwebltd/search",
-    "description": "Search allows you to easily add an intelligent search engine to your website or web application. It can be configured to search any database table.",
+    "name": "divineomega/search",
+    "description": "Search allows you to easily add an intelligent search engine to your website or web application.",
     "type": "library",
     "authors": [
         {
             "name": "Jordan Hall",
-            "email": "jordan.hall@rapidweb.biz"
+            "email": "jordan@hall05.co.uk"
         }
     ],
     "require": {
-        "rapidwebltd/uxdm": "^1.17.4",
-        "illuminate/support": "^5.1",
+        "DivineOmega/uxdm": "^3.3.1",
+        "illuminate/support": ">=5.1",
         "psr/cache": "^1.0"
     },
     "autoload":{
         "psr-4": {
-            "RapidWeb\\Search\\": "src/"
+            "DivineOmega\\Search\\": "src/"
         }
     },
     "license": "LGPL-3.0-only"

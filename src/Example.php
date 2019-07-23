@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/../vendor/autoload.php';
 
-use \RapidWeb\Search\Search;
+use \DivineOmega\Search\Search;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Cache\Adapter\Filesystem\FilesystemCachePool;

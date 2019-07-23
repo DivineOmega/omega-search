@@ -8,7 +8,7 @@ It can be configured to search any database table.
 You can install this package with Composer.
 
 ```
-composer require rapidwebltd/search
+composer require divineomega/search
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ composer require rapidwebltd/search
 Using Search is easy. Take a look at the following example.
 
 ```php
-use \RapidWeb\Search\Search;
+use \DivineOmega\Search\Search;
 
 // Setup your database connection. 
 // If you already have a connection setup, you can skip this step.
@@ -47,11 +47,11 @@ Each `SearchResult` object in the array provides the primary key `id` and its `r
 simply a number that is higher on more relevant results. The array is sorted by relevance descending.
 
 ```php
-object(RapidWeb\Search\SearchResults)#731 (5) {
+object(DivineOmega\Search\SearchResults)#731 (5) {
   ["results"]=>
   array(10) {
     [0]=>
-    object(RapidWeb\Search\SearchResult)#588 (2) {
+    object(DivineOmega\Search\SearchResult)#588 (2) {
       ["id"]=>
       int(80)
       ["relevance"]=>
@@ -59,7 +59,7 @@ object(RapidWeb\Search\SearchResults)#731 (5) {
     }
     /** ... snipped ... */
     [9]=>
-    object(RapidWeb\Search\SearchResult)#597 (2) {
+    object(DivineOmega\Search\SearchResult)#597 (2) {
       ["id"]=>
       int(18469)
       ["relevance"]=>

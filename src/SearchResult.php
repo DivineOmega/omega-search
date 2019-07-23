@@ -1,6 +1,6 @@
 <?php
 
-namespace RapidWeb\Search;
+namespace DivineOmega\Search;
 
 
 class SearchResult {

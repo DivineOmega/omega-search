@@ -1,8 +1,8 @@
 <?php
 
-namespace RapidWeb\Search;
+namespace DivineOmega\Search;
 
-use RapidWeb\Search\SearchResult;
+use DivineOmega\Search\SearchResult;
 
 class SearchResults {
 
