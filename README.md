@@ -1,6 +1,6 @@
-# Search
+# Omega Search
 
-Search allows you to easily add an intelligent search engine to your website or web application. 
+Omega Search allows you to easily add an intelligent search engine to your website or web application. 
 It can be configured to search any database table.
 
 ## Installation
@@ -13,7 +13,7 @@ composer require divineomega/omega-search
 
 ## Usage
 
-Using Search is easy. Take a look at the following example.
+Using Omega Search is easy. Take a look at the following example.
 
 ```php
 use \DivineOmega\OmegaSearch\OmegaSearch;
@@ -22,10 +22,10 @@ use \DivineOmega\OmegaSearch\OmegaSearch;
 // If you already have a connection setup, you can skip this step.
 $pdo = new PDO('mysql:dbname=database_name;host=127.0.0.1', 'username', 'password');
 
-// Create a new Search object
-$search = new Search;
+// Create a new Omega Search object
+$search = new OmegaSearch;
 
-// Configure the Search object
+// Configure the Omega Search object
 $search->setDatabaseConnection($pdo)
        ->setTable('products')
        ->setPrimaryKey('product_groupid')
@@ -90,10 +90,10 @@ $cacheItemPool = new FilesystemCachePool($filesystem);
 // Set cache expiry time
 $cacheExpiryInSeconds = 300;
 
-// Create a new Search object
-$search = new Search;
+// Create a new Omega Search object
+$search = new Omega Search;
 
-// Configure the Search object
+// Configure the Omega Search object
 $search->setDatabaseConnection($pdo)
        ->setTable('products')
        ->setPrimaryKey('product_groupid')
