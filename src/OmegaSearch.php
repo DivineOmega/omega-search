@@ -54,7 +54,7 @@ class OmegaSearch {
         }
 
         if (!$this->primaryKey) {
-            throw new InvalidArgumentException('No primary key specified. You must specify the table\' primary key.');
+            throw new InvalidArgumentException('No primary key specified. You must specify the table\'s primary key.');
         }
 
         if (!$this->fields) {
