@@ -93,7 +93,7 @@ $cacheItemPool = new FilesystemCachePool($filesystem);
 $cacheExpiryInSeconds = 300;
 
 // Create a new Omega Search object
-$search = new Omega Search;
+$search = new OmegaSearch;
 
 // Configure the Omega Search object
 $search->setDatabaseConnection($pdo)
