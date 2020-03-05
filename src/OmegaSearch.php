@@ -12,10 +12,11 @@ class OmegaSearch {
     private $pdo;
     private $table;
     private $primaryKey;
-    private $fields;
+    private $fields = [];
     private $conditions;
     private $cacheItemPool;
     private $cacheExpiresAfter;
+    private $sqlOverride;
 
     public function setDatabaseConnection(PDO $pdo) {
         $this->pdo = $pdo;
@@ -24,6 +25,11 @@ class OmegaSearch {
 
     public function setTable($table) {
         $this->table = $table;
+        return $this;
+    }
+
+    public function setSqlOverride($sqlOverride) {
+        $this->sqlOverride = $sqlOverride;
         return $this;
     }
 
@@ -57,7 +63,7 @@ class OmegaSearch {
             throw new InvalidArgumentException('No primary key specified. You must specify the table\'s primary key.');
         }
 
-        if (!$this->fields) {
+        if (!$this->sqlOverride && !$this->fields) {
             throw new InvalidArgumentException('No fields specified. You must specify the fields you wish to search.');
         }
 
@@ -108,7 +114,7 @@ class OmegaSearch {
         $results = [];
 
         $migratorManager = new MigratorManager($this->pdo, $this->table, $this->fields);
-        $migrator = $migratorManager->createMigrator();
+        $migrator = $migratorManager->createMigrator($this->sqlOverride);
 
         if ($this->cacheItemPool && $this->cacheExpiresAfter) {
             $cacheKey = sha1(serialize([$this->pdo->getAttribute(PDO::ATTR_CONNECTION_STATUS), $this->table, $this->fields]));
