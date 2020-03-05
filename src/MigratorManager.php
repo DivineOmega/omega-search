@@ -20,15 +20,13 @@ class MigratorManager {
         $this->fields = $fields;
     }
 
-    public function createMigrator($sqlOverride) {
+    public function createMigrator($sqlOverride = null) {
 
         $pdoSource = new PDOSource($this->pdo, $this->table);
         $pdoSource->setPerPage(100);
 
         if($sqlOverride) {
             $pdoSource->setOverrideSQL($sqlOverride);
-        } else if (!$this->table) {
-            throw new InvalidArgumentException('No table specified. You must specify a table to search.');
         }
 
         $migrator = new Migrator();

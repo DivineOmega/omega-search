@@ -79,6 +79,36 @@ object(DivineOmega\OmegaSearch\SearchResults)#731 (5) {
 }
 ```
 
+### Overriding SQL
+
+If you wish to write your own SQL query instead of using the one generated, for example if you wish to join another table, you can use the `setSqlOverride` method. The query passed into this method must contain a `SELECT` and `LIMIT ? , ?`, an exception will be thrown otherwise. You can omit the `setFieldsToSearch` method when overriding the SQL. 
+
+Take a look at the following example:
+
+```php
+use \DivineOmega\OmegaSearch\OmegaSearch;
+
+// Setup your database connection. 
+// If you already have a connection setup, you can skip this step.
+$pdo = new PDO('mysql:dbname=database_name;host=127.0.0.1', 'username', 'password');
+
+// Create a new Omega Search object
+$search = new OmegaSearch;
+
+// Configure the Omega Search object
+$search->setDatabaseConnection($pdo)
+       ->setTable('products')
+       ->setPrimaryKey('product_groupid')
+       ->setConditions(['product_live' => 1])
+       ->setSqlOverride('SELECT product_name, product_description, product_seokeywords FROM products LIMIT ? , ?');
+
+// Perform a search for 'test product', limited to top 10 results
+$results = $search->query('test product', 10);
+
+// Output results
+var_dump($results);
+``` 
+
 ### Caching Source Data
 
 To speed up searching, you can cache the source data using any PSR-6 compliant cache pool. An example of this is shown below.
